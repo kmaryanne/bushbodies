@@ -5,11 +5,11 @@ import { useState, useEffect } from 'react';
 import { Compass, Menu, Leaf } from 'lucide-react';
 
 const sectionMap: Record<string, string> = {
-  'home': 'Bush Bodies',
+  'home': 'Kinetic Clearing',
   'story': "The Founder's Story",
-  'unbound': 'Unbound Trekkers',
-  'rucksack': 'The Rucksack Pocket',
-  'basecamp': 'Base Camp Pop-Ups',
+  'hatchet': 'The Field Hatchet',
+  'clearing': 'Kinetic Clearing',
+  'enrollment': 'Join The Signal'
 };
 
 // Randomized leaf decoration along the header bottom edge
@@ -47,7 +47,7 @@ const LeafDecoration = () => {
 };
 
 export default function DynamicHeader() {
-  const [activeTitle, setActiveTitle] = useState('Bush Bodies');
+  const [activeTitle, setActiveTitle] = useState('Kinetic Clearing');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -76,7 +76,7 @@ export default function DynamicHeader() {
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
     // Target the IDs defined in page.tsx
-    const targets = document.querySelectorAll('#home, #story, #unbound, #rucksack, #basecamp');
+    const targets = document.querySelectorAll('#home, #story, #hatchet, #clearing');
     targets.forEach((t) => observer.observe(t));
 
     window.addEventListener('scroll', handleScroll);
@@ -124,9 +124,9 @@ export default function DynamicHeader() {
         <nav className="hidden md:flex space-x-8 font-vision font-black text-xs text-white uppercase tracking-[0.2em]">
           <a href="#home" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Home</a>
           <a href="#story" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Story</a>
-          <a href="#unbound" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Unbound</a>
-          <a href="#rucksack" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Rucksack</a>
-          <a href="#basecamp" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Base Camp</a>
+          <a href="#hatchet" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Hatchet</a>
+          <a href="#clearing" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Clearing</a>
+          <a href="#enrollment" className="hover:text-action hover:border-action transition-all border-b-2 border-transparent hover:drop-shadow-[0_0_8px_rgba(255,85,0,0.7)] pb-1">Alert</a>
         </nav>
 
         {/* Mobile Menu Icon */}
@@ -145,14 +145,14 @@ export default function DynamicHeader() {
           <a href="#story" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
             <div className="w-2 h-2 bg-yellow"></div> Story
           </a>
-          <a href="#unbound" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
-            <div className="w-2 h-2 bg-yellow"></div> Unbound Trekkers
+          <a href="#hatchet" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
+            <div className="w-2 h-2 bg-yellow"></div> The Field Hatchet
           </a>
-          <a href="#rucksack" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
-            <div className="w-2 h-2 bg-yellow"></div> The Rucksack Pocket
+          <a href="#clearing" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
+            <div className="w-2 h-2 bg-yellow"></div> Kinetic Clearing
           </a>
-          <a href="#basecamp" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
-            <div className="w-2 h-2 bg-yellow"></div> Base Camp Pop-Ups
+          <a href="#enrollment" className="hover:text-action flex items-center gap-4 transition-all" onClick={() => setMobileMenuOpen(false)}>
+            <div className="w-2 h-2 bg-action"></div> Alert the Signal
           </a>
         </div>
       )}
