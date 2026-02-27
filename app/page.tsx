@@ -3,14 +3,15 @@
 
 import { useState } from 'react';
 import { Crosshair, Map, Wind, Trees, ArrowRight, Activity, Cpu, PlusSquare, Brain, Bone, Download, MapPin, Users, Axe, Radio, Signal } from 'lucide-react';
+import { OffGridResetIcon } from '@/components/OffGridResetIcon';
 
 // ... (Keep existing waypoint data arrays the same as before)
 const triageMovements = [
-    { state: "Tangled (Overwhelmed)", action: "The Breach", instruction: "exercise example" },
-    { state: "Buried (Anxious)", action: "The Thicket", instruction: "exercise example" },
-    { state: "Stagnant (Sedentary)", action: "The Deadfall", instruction: "exercise example" },
-    { state: "Clouded (Scattered)", action: "The Horizon", instruction: "exercise example" },
-    { state: "Heavy (Reactive)", action: "The Anchor", instruction: "exercise example" }
+    { state: "Tangled (Overwhelmed) — Too many directions, nowhere to start, feeling \"trapped in the overgrowth.\"", action: "The Perimeter Stake", instruction: "Find a wall or a heavy piece of furniture. Place both palms flat against it at shoulder height. Lean in and push with 100% of your strength for 10 seconds, then immediately release and let your arms hang. Repeat 3 times." },
+    { state: "Buried (Anxious) — A heavy chest, shallow breathing, feeling like you're under the weight of \"deadfall.\"", action: "The Brush-Off", instruction: "Stand up and use your hands to vigorously \"sweep\" your body. Start at your shoulders and sweep down your arms to your fingertips. Sweep down your chest, your back, and down your legs to your feet. Imagine you are literally brushing off dirt or debris from a day in the field." },
+    { state: "Stagnant (Sedentary) — Physical \"frozen\" feeling, low energy, the \"stiff joints\" of a 9-to-5 map.", action: "The Pulse-Starter", instruction: "Stand with feet hip-width apart. Perform 10 small, rapid vertical hops. You don't need to go high; just get your heels off the ground. While jumping, let your jaw and shoulders go completely loose (the \"ragdoll\" effect)." },
+    { state: "Clouded (Scattered) — \"Needle in a haystack\" focus is missing; thoughts are drifting like mist.", action: "The Horizon Pivot", instruction: "Stand still and pick one specific, tiny object in the distance (the \"Waypoint\"). Keep your eyes locked on it. Now, slowly rotate your entire body 360 degrees while keeping your head turned and your eyes fixed on that one point as long as possible. Once you lose sight of it, whip your head around to find it again immediately." },
+    { state: "The Universal Clearing — For when you don't know which state you're in, but you know you're stuck.", action: "The Hatchet Swing", instruction: "Stand with a wide base. Interlace your fingers as if holding a hatchet handle. Reach high over your head, stretching your spine. On a forceful exhale (a \"Ha!\" sound), swing your \"hatchet\" down between your legs, hinging at the hips." }
 ];
 
 export default function Home() {
@@ -53,16 +54,20 @@ export default function Home() {
                 </div>
 
                 <div className="relative z-10 max-w-4xl mx-auto mt-20">
-                    <Trees className="w-16 h-16 text-white mx-auto mb-8 animate-pulse" strokeWidth={1.5} />
+                    <img
+                        src="/kineticclearinglogo1.png"
+                        alt="Kinetic Clearing"
+                        className="w-24 h-24 mx-auto mb-8 object-contain drop-shadow-2xl"
+                    />
                     <h1 className="font-serif text-6xl md:text-9xl font-bold text-granite mb-8 uppercase tracking-tight leading-none drop-shadow-2xl">
                         Clear the <span className="text-white">Brush.</span>
                     </h1>
                     <p className="max-w-3xl mx-auto text-xl md:text-2xl font-vision font-light leading-relaxed text-white mb-12 drop-shadow-md tracking-wide">
-                        Are you tired of trying to force yourself onto a paved road that doesn’t fit your internal landscape? We use intentional movement as a hatchet to hack through the emotional deadfall and reclaim your internal compass. Instead of staying tangled in the overgrowth, we turn that stagnant weight into kinetic energy.
+                        Are you tired of feeling stuck in a mental fog that doesn't fit your life? We use purposeful movement to help you release pent-up stress and clear the emotional weight that holds you back. By focusing on reachable goals, we transform that "frozen" feeling into the clarity and energy you need to move forward.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-6">
                         <a href="#repair" className="bg-transparent border-4 border-yellow text-yellow px-10 py-5 font-serif text-xl tracking-widest uppercase hover:bg-yellow hover:text-black transition-all flex items-center justify-center gap-2">
-                            Field Repair <Axe className="w-6 h-6" />
+                            Off-Grid Reset <OffGridResetIcon className="w-6 h-6" />
                         </a>
                     </div>
                 </div>
@@ -143,8 +148,8 @@ export default function Home() {
             <section id="repair" className="py-24 bg-white relative overflow-hidden">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col items-center text-center mb-16">
-                        <Activity className="w-16 h-16 text-action mb-8" />
-                        <h2 className="font-serif text-5xl md:text-7xl font-bold text-spruce mb-8 uppercase tracking-tight leading-none italic">Field <span className="text-action">Triage</span></h2>
+                        <OffGridResetIcon className="w-16 h-16 text-action mb-8" />
+                        <h2 className="font-serif text-5xl md:text-7xl font-bold text-spruce mb-8 uppercase tracking-tight leading-none italic">Off-Grid <span className="text-action">Reset</span></h2>
                         <p className="font-vision text-2xl font-bold text-spruce mb-6 leading-tight max-w-2xl">The Signal: A 5-movement protocol to clear the brush when you're stuck in the thick of it.</p>
                     </div>
 
@@ -162,7 +167,7 @@ export default function Home() {
                                         disabled={isDeploying}
                                         className="bg-action text-white px-12 py-5 font-serif text-2xl uppercase tracking-widest hover:bg-action-hover transition-all flex items-center justify-center gap-3 mx-auto shadow-xl hover:shadow-action/20"
                                     >
-                                        {isDeploying ? 'Deploying...' : 'Deploy Triage Kit'} <Signal className={isDeploying ? 'animate-pulse' : ''} />
+                                        {isDeploying ? 'Deploying...' : 'Calibrate Tools'} <OffGridResetIcon className={`w-6 h-6 ${isDeploying ? 'animate-pulse' : ''}`} />
                                     </button>
                                 </div>
                             ) : (
@@ -212,7 +217,7 @@ export default function Home() {
 
             {/* BANNER: Pack Your Bag */}
             <div className="relative h-48 md:h-72 overflow-hidden bg-slate flex items-center justify-center">
-                <img src="/pack-your-bag.png" className="absolute inset-x-0 bottom-0 w-full h-[180%] object-cover object-bottom filter grayscale-[0.5] contrast-125 brightness-75 opacity-70 shadow-inner translate-y-[15%]" />
+                <img src="/packyourbagsimage.png" className="absolute inset-x-0 bottom-0 w-full h-[180%] object-cover object-bottom filter grayscale-[0.5] contrast-125 brightness-75 opacity-70 shadow-inner translate-y-[15%]" />
                 <h2 className="relative z-10 font-serif text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-granite to-slate-light uppercase tracking-widest opacity-90">
                     Pack Your Bag
                 </h2>
@@ -272,7 +277,7 @@ export default function Home() {
                         </div>
                         <div className="lg:w-1/2 relative">
                             <div className="border-8 border-yellow shadow-2xl overflow-hidden rotate-1">
-                                <img src="/kinetic-clearing.jpg" className="w-full h-full object-cover filter grayscale-[0.5] contrast-125 saturate-[0.7] brightness-90" alt="Kinetic Clearing" />
+                                <img src="/kinetic-clearing.jpg" className="w-full h-full object-cover filter grayscale-[0.5] contrast-125 saturate-[0.7] brightness-90" alt="Sleeping Giant Provincial Park" />
                             </div>
                             <div className="absolute top-8 left-8 bg-black text-yellow px-6 py-2 font-vision font-black uppercase tracking-tight text-sm z-20">Now Entering: The Clearing</div>
                         </div>
@@ -327,7 +332,7 @@ export default function Home() {
             </section>
 
             {/* Footer / Mission Statement */}
-            <footer className="bg-spruce text-granite p-12 text-center border-t-8 border-yellow">
+            <footer id="mission" className="bg-spruce text-granite p-12 text-center border-t-8 border-yellow">
                 <div className="max-w-4xl mx-auto mb-12">
                     <Crosshair className="w-12 h-12 text-action mx-auto mb-6" />
                     <h3 className="font-serif text-3xl font-bold uppercase mb-4 tracking-tight">The Mission</h3>

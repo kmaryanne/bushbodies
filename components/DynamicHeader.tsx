@@ -7,9 +7,11 @@ import { Compass, Menu, Leaf } from 'lucide-react';
 const sectionMap: Record<string, string> = {
   'home': 'Kinetic Clearing',
   'story': "The Founder's Story",
+  'repair': 'Off-Grid Reset',
   'hatchet': 'The Field Hatchet',
   'clearing': 'Kinetic Clearing',
-  'enrollment': 'Join The Signal'
+  'enrollment': 'Join The Signal',
+  'mission': 'Our Mission'
 };
 
 // Randomized leaf decoration along the header bottom edge
@@ -49,11 +51,17 @@ const LeafDecoration = () => {
 export default function DynamicHeader() {
   const [activeTitle, setActiveTitle] = useState('Kinetic Clearing');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      // Calculate scroll progress percentage (0 to 1)
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollHeight > 0 ? Math.min(Math.max(window.scrollY / scrollHeight, 0), 1) : 0;
+      setScrollProgress(progress);
     };
 
     // Intersection Observer to track which section is currently viewed
@@ -66,20 +74,23 @@ export default function DynamicHeader() {
       });
     };
 
-    // Observer options: Trigger when 40% of the section is visible in viewport
+    // Observer options: Trigger when the section reaches a fair margin near the top
     const observerOptions = {
       root: null,
-      rootMargin: '-10% 0px -50% 0px', // Adjusts the "trigger zone" toward the top middle
+      rootMargin: '-10% 0px -40% 0px', // Adjusted to catch the bottom-most section easier
       threshold: 0,
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
     // Target the IDs defined in page.tsx
-    const targets = document.querySelectorAll('#home, #story, #hatchet, #clearing');
+    const targets = document.querySelectorAll('#home, #story, #repair, #hatchet, #clearing, #enrollment, #mission');
     targets.forEach((t) => observer.observe(t));
 
     window.addEventListener('scroll', handleScroll);
+
+    // Initial call to set initial progress
+    handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -111,8 +122,17 @@ export default function DynamicHeader() {
 
         {/* Dynamic Logo/Title Section */}
         <div className="flex items-center gap-3">
-          {/* The compass rotates slightly when scrolled to indicate kinetic energy */}
-          <Compass className={`text-yellow transition-all duration-500 ${isScrolled ? 'h-6 w-6 rotate-45' : 'h-8 w-8'}`} strokeWidth={2.5} />
+          {/* The compass rotates dynamically based on scroll progress (up to 360deg) */}
+          <Compass
+            className="text-yellow"
+            strokeWidth={2.5}
+            style={{
+              transform: `rotate(${scrollProgress * 360}deg)`,
+              width: `${Math.max(24, 32 - (scrollProgress * 8))}px`,
+              height: `${Math.max(24, 32 - (scrollProgress * 8))}px`,
+              transition: 'width 0.5s, height 0.5s', // Smooth scaling
+            }}
+          />
 
           {/* The Changing Text */}
           <span key={activeTitle} className={`font-serif font-black uppercase tracking-widest text-granite animate-in slide-in-from-bottom-2 fade-in duration-300 ${isScrolled ? 'text-xl' : 'text-2xl'}`}>
@@ -124,6 +144,7 @@ export default function DynamicHeader() {
         <nav className="hidden md:flex space-x-8 font-vision font-black text-xs text-white uppercase tracking-[0.2em]">
           <a href="#home" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Home</a>
           <a href="#story" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Story</a>
+          <a href="#repair" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Reset</a>
           <a href="#hatchet" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Hatchet</a>
           <a href="#clearing" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Clearing</a>
           <a href="#enrollment" className="hover:text-action hover:border-action transition-all border-b-2 border-transparent hover:drop-shadow-[0_0_8px_rgba(255,85,0,0.7)] pb-1">Alert</a>
@@ -138,23 +159,33 @@ export default function DynamicHeader() {
 
       {/* Basic Mobile Menu Drawer (Safety Vest Style) */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-action border-b-8 border-yellow p-8 flex flex-col gap-6 text-white font-black uppercase tracking-[0.2em] text-lg shadow-2xl animate-in slide-in-from-top duration-300">
-          <a href="#home" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
-            <div className="w-2 h-2 bg-yellow"></div> Home
-          </a>
-          <a href="#story" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
-            <div className="w-2 h-2 bg-yellow"></div> Story
-          </a>
-          <a href="#hatchet" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
-            <div className="w-2 h-2 bg-yellow"></div> The Field Hatchet
-          </a>
-          <a href="#clearing" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
-            <div className="w-2 h-2 bg-yellow"></div> Kinetic Clearing
-          </a>
-          <a href="#enrollment" className="hover:text-action flex items-center gap-4 transition-all" onClick={() => setMobileMenuOpen(false)}>
-            <div className="w-2 h-2 bg-action"></div> Alert the Signal
-          </a>
-        </div>
+        <>
+          {/* Backdrop for closing menu on click outside */}
+          <div
+            className="md:hidden absolute top-full left-0 w-full h-screen bg-black/50 backdrop-blur-sm animate-in fade-in duration-300"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div className="md:hidden absolute top-full left-0 w-full bg-action border-b-8 border-yellow p-8 flex flex-col gap-6 text-white font-black uppercase tracking-[0.2em] text-lg shadow-2xl animate-in slide-in-from-top duration-300">
+            <a href="#home" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
+              <div className="w-2 h-2 bg-yellow"></div> Home
+            </a>
+            <a href="#story" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
+              <div className="w-2 h-2 bg-yellow"></div> Story
+            </a>
+            <a href="#repair" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
+              <div className="w-2 h-2 bg-yellow"></div> Reset
+            </a>
+            <a href="#hatchet" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
+              <div className="w-2 h-2 bg-yellow"></div> The Field Hatchet
+            </a>
+            <a href="#clearing" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
+              <div className="w-2 h-2 bg-yellow"></div> Kinetic Clearing
+            </a>
+            <a href="#enrollment" className="hover:text-action flex items-center gap-4 transition-all" onClick={() => setMobileMenuOpen(false)}>
+              <div className="w-2 h-2 bg-action"></div> Alert the Signal
+            </a>
+          </div>
+        </>
       )}
     </header>
   );

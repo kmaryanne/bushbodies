@@ -19,3 +19,14 @@ This session focused on narrowing the project scope and solidifying the brand id
 
 ### Current State:
 The site is currently a high-impact, single-page landing experience ready for content expansion and backend integration for user enrollment. All visual assets are stylized, and the navigation is functionally tied to the content layout.
+
+## Session Summary (Late Feb 2026)
+This session focused on UI polish, mobile navigation, and refining the Dynamic Header's intersection observer behavior.
+
+### Major Objectives Completed:
+- **Mobile Navigation:** Added a full-screen blurred backdrop to the mobile menu (`DynamicHeader`) that closes the menu when clicked outside.
+- **Dynamic Compass:** Updated the Compass logo in the navbar to dynamically rotate and scale smoothly based on the vertical scroll percentage of the page.
+- **Navigation Links:** 
+  - Added "Reset" (changed from "Off-Grid Reset") to the desktop and mobile navigation menus.
+  - Linked the text "Our Mission" in the dynamic header to trigger when the user scrolls to the footer, without adding it as a clickable sticky nav link.
+- **Intersection Observer:** Fixed threshold/margin bugs that were preventing the bottom-most sections ("Join The Signal" and "Our Mission") from correctly triggering the title change in the dynamic header on smaller screens.
