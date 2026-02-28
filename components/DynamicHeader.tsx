@@ -147,6 +147,7 @@ export default function DynamicHeader() {
           <a href="#repair" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Reset</a>
           <a href="#hatchet" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Hatchet</a>
           <a href="#clearing" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Clearing</a>
+          <a href="#mission" className="hover:text-yellow transition-colors border-b-2 border-transparent hover:border-yellow pb-1">Mission</a>
           <a href="#enrollment" className="hover:text-action hover:border-action transition-all border-b-2 border-transparent hover:drop-shadow-[0_0_8px_rgba(255,85,0,0.7)] pb-1">Alert</a>
         </nav>
 
@@ -181,8 +182,11 @@ export default function DynamicHeader() {
             <a href="#clearing" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
               <div className="w-2 h-2 bg-yellow"></div> Kinetic Clearing
             </a>
+            <a href="#mission" className="hover:text-yellow flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
+              <div className="w-2 h-2 bg-yellow"></div> The Mission
+            </a>
             <a href="#enrollment" className="hover:text-action flex items-center gap-4 transition-all" onClick={() => setMobileMenuOpen(false)}>
-              <div className="w-2 h-2 bg-action"></div> Alert the Signal
+              <div className="w-2 h-2 bg-yellow"></div> Alert the Signal
             </a>
           </div>
         </>

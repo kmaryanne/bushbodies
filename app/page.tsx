@@ -41,7 +41,7 @@ export default function Home() {
         <div className="flex flex-col">
 
             {/* HERO SECTION: ID="home" */}
-            <section id="home" className="relative min-h-screen flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 pt-20 pb-32 overflow-hidden">
+            <section id="home" className="relative flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-32 overflow-hidden">
 
                 {/* HERO IMAGE BACKGROUND */}
                 <div className="absolute inset-0 -z-20">
@@ -53,18 +53,21 @@ export default function Home() {
                     <div className="absolute inset-0 bg-gradient-to-b from-spruce/80 via-spruce/50 to-slate-dark"></div>
                 </div>
 
-                <div className="relative z-10 max-w-4xl mx-auto mt-20">
-                    <img
-                        src="/kineticclearinglogo1.png"
-                        alt="Kinetic Clearing"
-                        className="w-24 h-24 mx-auto mb-8 object-contain drop-shadow-2xl"
-                    />
-                    <h1 className="font-serif text-6xl md:text-9xl font-bold text-granite mb-8 uppercase tracking-tight leading-none drop-shadow-2xl">
-                        Clear the <span className="text-white">Brush.</span>
-                    </h1>
-                    <p className="max-w-3xl mx-auto text-xl md:text-2xl font-vision font-light leading-relaxed text-white mb-12 drop-shadow-md tracking-wide">
-                        Are you tired of feeling stuck in a mental fog that doesn't fit your life? We use purposeful movement to help you release pent-up stress and clear the emotional weight that holds you back. By focusing on reachable goals, we transform that "frozen" feeling into the clarity and energy you need to move forward.
-                    </p>
+                <div className="relative z-10 max-w-4xl mx-auto mt-8">
+
+                    <div className="flex flex-wrap items-center justify-center mb-12">
+                        <img src="/kinetic-clear.png" alt="Clear" className="h-24 sm:h-32 md:h-48 lg:h-60 object-contain drop-shadow-2xl z-10 -mx-1 sm:-mx-1.5 md:-mx-2 lg:-mx-3" />
+                        <img src="/kinetic-the.png" alt="the" className="h-20 sm:h-24 md:h-36 lg:h-48 object-contain drop-shadow-2xl scale-[1.18] z-20 -mr-1 sm:-mr-1.5 md:-mr-2 lg:-mr-3 -ml-1.5 sm:-ml-2 md:-ml-3 lg:-ml-4" />
+                        <img src="/kinetic-brush.png" alt="Brush." className="h-24 sm:h-32 md:h-48 lg:h-60 object-contain drop-shadow-2xl z-10 -mx-1 sm:-mx-1.5 md:-mx-2 lg:-mx-3" />
+                    </div>
+                    <div className="max-w-3xl mx-auto mb-12 bg-black/40 backdrop-blur-sm p-6 md:p-8 border-l-4 border-yellow/80 shadow-lg text-left">
+                        <p className="text-base md:text-lg font-vision font-light leading-relaxed text-white tracking-wide mb-6 opacity-90">
+                            "I didn't find my mental stillness in a clinic; I found it lost in the Canadian bush. When the mind feels like overgrowth, staring at another map won't save you. I learned to survive my own thoughts not by sitting still, but through raw, kinetic energy—using a hatchet to carve a physical clearing where I no longer felt lost. We use those same kinetic techniques to cut through the noise, creating the space you need to finally trust your own internal compass."
+                        </p>
+                        <p className="text-yellow text-sm font-vision uppercase tracking-widest font-bold">
+                            — Kirstin Cruickshank Taylor
+                        </p>
+                    </div>
                     <div className="flex flex-col sm:flex-row justify-center gap-6">
                         <a href="#repair" className="bg-transparent border-4 border-yellow text-yellow px-10 py-5 font-serif text-xl tracking-widest uppercase hover:bg-yellow hover:text-black transition-all flex items-center justify-center gap-2">
                             Off-Grid Reset <OffGridResetIcon className="w-6 h-6" />
